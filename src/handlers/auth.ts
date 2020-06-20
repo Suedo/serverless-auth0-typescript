@@ -20,6 +20,7 @@ const generatePolicy = (principalId, methodArn) => {
     },
   };
 };
+// https://docs.aws.amazon.com/apigateway/latest/developerguide/permissions.html
 
 export async function handler(event, context) {
   if (!event.authorizationToken) {
@@ -34,10 +35,12 @@ export async function handler(event, context) {
 
     return {
       ...policy,
-      context: claims
+      context: claims,
     };
   } catch (error) {
     console.log(error);
     throw 'Unauthorized';
   }
-};
+}
+
+// https://www.serverless.com/examples/aws-node-auth0-custom-authorizers-api/
